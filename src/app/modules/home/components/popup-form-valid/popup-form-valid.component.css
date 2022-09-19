@@ -1,8 +1,8 @@
 .popup-container {
-  width: 30%;
-  background-color: rgb(78, 206, 78);
+  width: 45%;
+  background-color: var(--deg-secondary);
   margin: 0 auto;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-top: 12px;
   display: block;
 }
@@ -16,6 +16,12 @@
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 1550px) {
+  .popup-container {
+    width: 80%;
   }
 }
 

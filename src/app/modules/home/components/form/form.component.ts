@@ -107,13 +107,13 @@ export class FormComponent implements OnInit {
   consultaCEP() {
     const cep = this.form.get('cep')!.value;
 
-    if (cep != null && cep !== '') {
+    if (cep.length === 8) {
       this.consultaCepService.getCep(cep).subscribe({
         next: (dados) => {
           if (dados.hasOwnProperty('erro')) {
             this.errorCep();
             this.form.patchValue({
-              cep: '',
+              cep: null,
             });
           } else {
             this.setCepForm(dados);
@@ -138,5 +138,7 @@ export class FormComponent implements OnInit {
 
   public onSubmit() {
     console.log(this.form);
+
+    // this.form.reset()
   }
 }

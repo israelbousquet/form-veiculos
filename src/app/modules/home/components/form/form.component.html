@@ -96,6 +96,21 @@
         </div>
       </div>
 
+      <!-- <div class="cookie-checkbox">
+        <div class="cookie-title">
+          <h4>Permitir coleta de Cookies</h4>
+          <p>Armazenamos dados temporários para melhorar sua experiência.</p>
+        </div>
+
+        <div class="cookie-group">
+          <div class="cookie-input">
+            <input type="checkbox" name="cookie" id="cookie">
+            <label for="cookie">Sim</label>
+          </div>
+          <button>Ler termos de consentimento</button>
+        </div>
+      </div> -->
+
       <div class="input-group-col-3">
         <h2 class="col-span-total font-1xl">Dados do Proprietário</h2>
 
@@ -190,7 +205,7 @@
       </div>
 
       <div class="btn-submit">
-        <button type="submit" >Enviar</button>
+        <button type="submit" [disabled]="!form.valid">Enviar</button>
       </div>
 
       <app-popup-form-valid *ngIf="formDir.submitted"></app-popup-form-valid>

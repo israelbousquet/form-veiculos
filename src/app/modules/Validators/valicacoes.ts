@@ -23,7 +23,7 @@ export class Validacoes {
       valido = false;
     } else {
       for (let i = 1; i <= 9; i++) {
-        soma = soma + parseInt(cpf.substring(i - 1, i)) * (11 - i);
+        soma = soma + parseInt(cpf?.substring(i - 1, i)) * (11 - i);
       }
 
       resto = (soma * 10) % 11;
@@ -32,14 +32,14 @@ export class Validacoes {
         resto = 0;
       }
 
-      if (resto != parseInt(cpf.substring(9, 10))) {
+      if (resto != parseInt(cpf?.substring(9, 10))) {
         valido = false;
       }
 
       soma = 0;
 
       for (let i = 1; i <= 10; i++) {
-        soma = soma + parseInt(cpf.substring(i - 1, i)) * (12 - i);
+        soma = soma + parseInt(cpf?.substring(i - 1, i)) * (12 - i);
       }
 
       resto = (soma * 10) % 11;
@@ -48,7 +48,7 @@ export class Validacoes {
         resto = 0;
       }
 
-      if (resto != parseInt(cpf.substring(10, 11))) {
+      if (resto != parseInt(cpf?.substring(10, 11))) {
         valido = false;
       }
 
@@ -70,7 +70,8 @@ export class Validacoes {
     if (
       regexPlaca.test(placa) ||
       regexPlacaMercosulCarro.test(placa) ||
-      regexPlacaMercosulMoto.test(placa)
+      regexPlacaMercosulMoto.test(placa) ||
+      placa === null
     ) {
       return null;
     } else {
