@@ -1,0 +1,199 @@
+<div class="container">
+  <div class="form">
+    <form
+      action="#"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      #formDir="ngForm"
+    >
+      <div class="input-group-col-3">
+        <h2 class="col-span-total font-1xl">Dados do Veículo</h2>
+
+        <div class="input-box">
+          <label for="renavam">Renavam</label>
+          <input
+            type="text"
+            id="renavam"
+            formControlName="renavam"
+            [mask]="'000000000'"
+          />
+          <app-error-mask *ngIf="validatorError('renavam', 'mask')" maskLength=9></app-error-mask>
+          <app-error-msg [control]="(getCampo('renavam'))" label="Renavam"></app-error-msg>
+        </div>
+
+        <div class="input-box">
+          <label for="marca">Marca</label>
+          <div class="form-input">
+            <input type="text" id="marca" formControlName="marca" />
+            <!-- <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span> -->
+          </div>
+          <app-error-msg [control]="(getCampo('marca'))" label="Marca"></app-error-msg>
+        </div>
+
+        <div class="input-box">
+          <label for="modelo">Modelo</label>
+          <input type="text" id="modelo" formControlName="modelo" />
+          <app-error-msg [control]="(getCampo('modelo'))" label="Modelo do Veículo"></app-error-msg>
+        </div>
+
+        <div class="input-box">
+          <label for="cor">Cor do Veículo</label>
+          <div class="custom-select">
+            <select id="cor" formControlName="corVeiculo">
+              <option *ngFor="let item of colorList" [ngValue]="item">
+                {{ item.cor }}
+              </option>
+            </select>
+            <span class="select-arrow"></span>
+            <app-error-msg [control]="(getCampo('corVeiculo'))" label="Cor do Veículo"></app-error-msg>
+          </div>
+        </div>
+
+        <div class="input-box">
+          <label for="tipoVeiculo">Tipo do Veículo</label>
+          <div class="custom-select">
+            <select id="tipoVeiculo" formControlName="tipoVeiculo">
+              <option
+                *ngFor="let tipe of listVehicles"
+                [value]="tipe.toLowerCase()"
+              >
+                {{ tipe }}
+              </option>
+            </select>
+            <span class="select-arrow"></span>
+            <app-error-msg [control]="(getCampo('tipoVeiculo'))" label="Tipo do Veículo"></app-error-msg>
+          </div>
+        </div>
+
+        <div class="input-box">
+          <label for="placa">Placa</label>
+          <input
+            type="text"
+            id="placa"
+            formControlName="placa"
+            class="input-uppercase"
+          />
+          <app-error-msg [control]="(getCampo('placa'))" label="Placa"></app-error-msg>
+        </div>
+      </div>
+
+      <div class="fuel-geral">
+        <div class="fuel-title">
+          <h4>Tipo de combustível</h4>
+        </div>
+
+        <div class="fuel-group">
+          <div class="fuel-input" *ngFor="let item of fuelOptions">
+            <input
+              type="radio"
+              name="fuel"
+              id="{{ item.value }}"
+              [value]="item.value"
+              formControlName="fuel"
+            />
+            <label for="{{ item.value }}">{{ item.name }}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group-col-3">
+        <h2 class="col-span-total font-1xl">Dados do Proprietário</h2>
+
+        <div class="input-box">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" formControlName="nome" placeholder="Digite seu primeiro nome"/>
+          <app-error-msg [control]="(getCampo('nome'))" label="Nome"></app-error-msg>
+        </div>
+
+        <div class="input-box">
+          <label for="sobrenome">Sobrenome</label>
+          <input type="text" id="sobrenome" formControlName="sobrenome" placeholder="Digite seu sobrenome"/>
+          <app-error-msg [control]="(getCampo('sobrenome'))" label="Sobrenome"></app-error-msg>
+        </div>
+
+        <div class="input-box">
+          <label for="tel">Telefone</label>
+          <input
+            type="text"
+            id="tel"
+            formControlName="tel"
+            [mask]="'(00) 00000-0000'"
+            placeholder="(00) 00000-0000"
+          />
+          <app-error-msg [control]="(getCampo('tel'))" label="Telefone"></app-error-msg>
+        </div>
+
+        <div class="input-box">
+          <label for="email">E-mail</label>
+          <input type="text" id="tel" formControlName="email" placeholder="Insira seu email"/>
+          <app-error-msg [control]="(getCampo('email'))" label="E-mail"></app-error-msg>
+        </div>
+
+        <div class="input-box">
+          <label for="cep">CEP</label>
+          <input
+            type="text"
+            id="cep"
+            formControlName="cep"
+            (blur)="consultaCEP()"
+            [mask]="'00000-000'"
+            placeholder="00000-000"
+          />
+          <app-error-mask *ngIf="validatorError('cep', 'mask')" maskLength=8></app-error-mask>
+          <app-error-msg [control]="(getCampo('cep'))" label="CEP"></app-error-msg>
+        </div>
+
+        <div class="input-box">
+          <label for="bairro">Bairro</label>
+          <input type="text" id="bairro" formControlName="bairro" readonly />
+        </div>
+
+        <div class="input-box">
+          <label for="rua">Rua</label>
+          <input type="text" id="rua" formControlName="rua" readonly />
+        </div>
+
+        <div class="input-box">
+          <label for="cidade">Cidade</label>
+          <input type="text" id="cidade" formControlName="cidade" readonly />
+        </div>
+
+        <div class="input-box">
+          <label for="uf">UF</label>
+          <input type="text" id="uf" formControlName="uf" readonly />
+        </div>
+
+        <div class="input-box">
+          <label for="numero">Número</label>
+          <input type="text" id="complemento" formControlName="numero" />
+          <app-error-msg [control]="(getCampo('numero'))" label="Número"></app-error-msg>
+        </div>
+
+        <div class="input-box">
+          <label for="complemento">Complemento</label>
+          <input type="text" id="complemento" formControlName="complemento" />
+          <app-error-msg [control]="(getCampo('complemento'))" label="Complemento"></app-error-msg>
+        </div>
+
+        <div class="input-box">
+          <label for="cpf">CPF</label>
+          <input
+            type="text"
+            id="cpf"
+            formControlName="cpf"
+            [mask]="'000.000.000-00'"
+            placeholder="Digite seu CPF"
+          />
+          <app-error-mask *ngIf="validatorError('cpf', 'mask')" maskLength=11></app-error-mask>
+          <app-error-msg [control]="(getCampo('cpf'))" label="CPF"></app-error-msg>
+        </div>
+      </div>
+
+      <div class="btn-submit">
+        <button type="submit" >Enviar</button>
+      </div>
+
+      <app-popup-form-valid *ngIf="formDir.submitted"></app-popup-form-valid>
+    </form>
+  </div>
+</div>

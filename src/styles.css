@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@import './dist/css/variables.css';
+@import './dist/css/typography.css';
+@import './dist/css/global.css';
+@import './dist/css//reset.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap');
+
+html{
+  height: 100vh;
+  background-color: var(--color-0);
+}
+/* 
+.container{
+  width: 100%;
+  margin: 0 auto;
+} */

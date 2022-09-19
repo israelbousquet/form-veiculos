@@ -1,0 +1,40 @@
+.popup-container {
+  width: 30%;
+  background-color: rgb(78, 206, 78);
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-top: 12px;
+  display: block;
+}
+
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 1150px) {
+  .popup-container {
+    width: 100%;
+  }
+}
+
+.popup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 1.4rem 1.4rem;
+}
+
+.popup-img {
+  width: 30px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.418);
+  border-radius: 50%;
+}

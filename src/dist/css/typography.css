@@ -1,0 +1,42 @@
+.font-1xl{
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.font-1-xxl{
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.font-1-md{
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+@media (max-width: 800px){
+  .font-1-xxl{
+    font-size: 1.8rem;
+  }
+
+  .font-1-md{
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 650px) {
+  .font-1xl{
+    font-size: 1.2rem;
+  }
+
+  .font-1-xxl{
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 450px){
+
+  .font-1-xxl{
+    font-size: 1.4rem;
+  }
+}

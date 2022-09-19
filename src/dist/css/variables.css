@@ -1,0 +1,27 @@
+:root {
+  --color-principal: #ffbc00;
+  --color-principal-light: #ffe08c;
+  --color-principal-hover: #ffae00;
+
+  --color-0: #ffffff;
+  --color-1: #333;
+  --color-2: #868686be;
+  --color-3: #8d8d8dbe;
+  --color-4: #e9e9e9be;
+
+  --deg-principal: rgb(250, 200, 3);
+
+  --color-disabled-hover: #a7a7a7be;
+}
+
+.color-0{
+  color: var(--color-0);
+}
+
+.color-1 {
+  color: var(--color-1);
+}
+
+.deg-principal {
+  color: var(--deg-principal);
+}
