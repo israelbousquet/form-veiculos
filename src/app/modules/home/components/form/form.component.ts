@@ -138,7 +138,5 @@ export class FormComponent implements OnInit {
 
   public onSubmit() {
     console.log(this.form);
-
-    // this.form.reset()
   }
 }
