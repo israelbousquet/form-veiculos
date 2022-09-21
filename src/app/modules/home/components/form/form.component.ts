@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 
 import * as JsonToXML from 'js2xmlparser';
+import { HttpClient } from '@angular/common/http';
 
 //validators
 
@@ -22,8 +23,6 @@ import { FuelOptions } from '../../interfaces/fuel-options';
 
 //services
 import { ListsService } from './../../services/lists.service';
-
-import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -46,7 +45,8 @@ export class FormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private listsService: ListsService,
-    private consultaCepService: ConsultaCepService
+    private consultaCepService: ConsultaCepService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -141,5 +141,10 @@ export class FormComponent implements OnInit {
   public onSubmit() {
     console.log(JsonToXML.parse('obj', this.form.value));
     console.log(this.form.value);
+
+    this.http.post('https://httpbin.org/post', JSON.stringify(this.form.value))
+    .subscribe({
+      next: dados => console.log(dados)
+    })
   }
 }
