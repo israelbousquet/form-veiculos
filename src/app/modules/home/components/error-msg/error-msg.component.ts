@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Validacoes } from 'src/app/modules/Validators/valicacoes';
+import { Validacoes } from 'src/app/modules/home/Validators/valicacoes';
 
 @Component({
   selector: 'app-error-msg',

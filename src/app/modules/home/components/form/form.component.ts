@@ -14,7 +14,7 @@ import * as JsonToXML from 'js2xmlparser';
 
 //validators
 
-import { Validacoes } from '../../../Validators/valicacoes';
+import { Validacoes } from '../../Validators/valicacoes';
 
 //interfaces
 import { ColorList } from '../../interfaces/color-list';
