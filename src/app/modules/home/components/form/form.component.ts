@@ -140,5 +140,6 @@ export class FormComponent implements OnInit {
 
   public onSubmit() {
     console.log(JsonToXML.parse('obj', this.form.value));
+    console.log(this.form.value);
   }
 }
