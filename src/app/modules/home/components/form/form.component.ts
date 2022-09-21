@@ -10,6 +10,8 @@ import {
   AbstractControl,
 } from '@angular/forms';
 
+import * as JsonToXML from 'js2xmlparser';
+
 //validators
 
 import { Validacoes } from '../../../Validators/valicacoes';
@@ -137,6 +139,6 @@ export class FormComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log(this.form);
+    console.log(JsonToXML.parse('obj', this.form.value));
   }
 }
