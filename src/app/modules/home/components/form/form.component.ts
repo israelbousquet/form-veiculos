@@ -92,28 +92,25 @@ export class FormComponent implements OnInit {
     this.fuelOptions = this.listsService.getFuel();
   }
 
-  onSelect(value: string) {
+  onSelectFipe(value: string) {
     this.listsService.getFipe(value).subscribe({
-      next: (res) => {
-        this.fipeListArray = res;
-      },
+      next: (res) => (this.fipeListArray = res),
     });
 
-    this.setValueItemFipe();
+    this.resetValueFipe();
   }
 
   consultaFipe(text: string) {
     this.filterFipeArray = this.fipeListArray.filter((dados) => {
-      if (
-        text.toLowerCase().replace('ë', 'e') ===
-        dados.nome.toLowerCase().replace('ë', 'e')
-      ) {
-        this.form.patchValue({
-          marca: dados.nome,
-        });
+      const dado = dados.nome;
+      const textNormalize = this.normalizeString(text);
+      const dadosNormalize = this.normalizeString(dado);
+
+      if (textNormalize === dadosNormalize) {
+        this.setValueFipe(dado);
         return null;
       }
-      return dados.nome.toLowerCase().startsWith(text.toLowerCase());
+      return dadosNormalize.startsWith(textNormalize);
     });
 
     if (text === '') {
@@ -121,14 +118,23 @@ export class FormComponent implements OnInit {
     }
   }
 
-  fipeItem(name: any) {
+  normalizeString(string: string) {
+    return string
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace('ë', 'e');
+  }
+
+  setValueFipe(name: any) {
     this.form.patchValue({
       marca: name,
     });
+
     this.filterFipeArray = [];
   }
 
-  setValueItemFipe() {
+  resetValueFipe() {
     this.form.patchValue({
       marca: '',
     });

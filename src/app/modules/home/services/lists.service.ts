@@ -39,4 +39,10 @@ export class ListsService {
       `https://parallelum.com.br/fipe/api/v1/${value}/marcas`
     );
   }
+
+  getModelos(value: string, codigo: number): Observable<Array<any>> {
+    return this.http.get<Array<any>>(
+      `https://parallelum.com.br/fipe/api/v1/${value}/marcas/${codigo}/modelos`
+    );
+  }
 }

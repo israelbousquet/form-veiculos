@@ -33,7 +33,7 @@
             <select
               id="tipoVeiculo"
               formControlName="tipoVeiculo"
-              (change)="onSelect($event.target.value)"
+              (change)="onSelectFipe($event.target.value)"
             >
               <option *ngFor="let tipe of listVehicles" value="{{ tipe.tipo }}">
                 {{ tipe.name }}
@@ -64,7 +64,7 @@
               <ul>
                 <li
                   *ngFor="let item of filterFipeArray"
-                  (click)="fipeItem(item.nome)"
+                  (click)="setValueFipe(item.nome)"
                 >
                   {{ item.nome }}
                 </li>
