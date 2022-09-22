@@ -115,6 +115,10 @@ button:hover {
   position: relative;
 }
 
+.input-box input.disabled-input{
+  background-color: var(--color-4);
+}
+
 .input-box select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -313,7 +317,7 @@ button:hover {
 }
 
 .fuel-input input:checked + label:before {
-  box-shadow: inset 0px 0px 0px 4px var(--color-principal);
+  background-color: var(--color-principal);
 }
 
 .fuel-input label {
@@ -322,6 +326,60 @@ button:hover {
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--color-1);
+}
+
+.marcasList {
+  position: absolute;
+  max-height: 150px;
+  min-width: 180px;
+
+  display: flex;
+  justify-content: flex-start;
+
+  padding: 20px;
+  border-radius: 5px;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  top: 2.4rem;
+  right: 0;
+
+  z-index: 2500;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  color: var(--color-2);
+
+  background-color: var(--color-0);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.marcasList ul{
+  width: 100%;
+}
+
+.marcasList li {
+  cursor: pointer;
+  padding: 10px 0px;
+  width: 100%;
+
+  transition: .15s ease-in-out;
+}
+
+.marcasList li:hover{
+  color: var(--color-principal);
+}
+
+.marcasList li ~ li {
+  border-top: 1px solid var(--color-4);
+}
+
+@media (max-width: 600px){
+  .marcasList{
+    width: 100%;
+  }
 }
 
 /* .cookie-title{

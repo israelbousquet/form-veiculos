@@ -20,6 +20,8 @@ import { Validacoes } from '../../Validators/valicacoes';
 //interfaces
 import { ColorList } from '../../interfaces/color-list';
 import { FuelOptions } from '../../interfaces/fuel-options';
+import { FipeList } from '../../interfaces/fipe-list';
+import { TypeVeiculo } from '../../interfaces/type-veiculo';
 
 //services
 import { ListsService } from './../../services/lists.service';
@@ -30,15 +32,15 @@ import { ListsService } from './../../services/lists.service';
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
-  public listVehicles: Array<string> = [];
+  public listVehicles: Array<TypeVeiculo> = [];
 
   public colorList: Array<ColorList> = [];
 
-  public fuelOptions: Array<FuelOptions> = [];
+  public fipeListArray: Array<FipeList> = [];
 
-  public customPatterns = {
-    '0': { pattern: new RegExp('/^[a-zA-Z][0-9]{7}$/') },
-  };
+  public filterFipeArray: Array<any> = [];
+
+  public fuelOptions: Array<FuelOptions> = [];
 
   form!: FormGroup;
 
@@ -88,6 +90,37 @@ export class FormComponent implements OnInit {
     });
 
     this.fuelOptions = this.listsService.getFuel();
+  }
+
+  onSelect(value: string) {
+    this.listsService.getFipe(value).subscribe({
+      next: (res) => {
+        this.fipeListArray = res;
+      },
+    });
+  }
+
+  consultaFipe(text: string) {
+    this.filterFipeArray = this.fipeListArray.filter((dados) => {
+      if (text.toLowerCase() === dados.nome.toLowerCase()) {
+        this.form.patchValue({
+          marca: dados.nome,
+        });
+        return null;
+      }
+      return dados.nome.toLowerCase().startsWith(text.toLowerCase());
+    });
+
+    if (text === '') {
+      this.filterFipeArray = [];
+    }
+  }
+
+  fipeItem(name: any) {
+    this.form.patchValue({
+      marca: name,
+    });
+    this.filterFipeArray = [];
   }
 
   getCampo(campo: string) {
@@ -142,9 +175,10 @@ export class FormComponent implements OnInit {
     console.log(JsonToXML.parse('obj', this.form.value));
     console.log(this.form.value);
 
-    this.http.post('https://httpbin.org/post', JSON.stringify(this.form.value))
-    .subscribe({
-      next: dados => console.log(dados)
-    })
+    this.http
+      .post('https://httpbin.org/post', JSON.stringify(this.form.value))
+      .subscribe({
+        next: (dados) => console.log(dados),
+      });
   }
 }

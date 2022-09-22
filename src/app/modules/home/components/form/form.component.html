@@ -17,23 +17,73 @@
             formControlName="renavam"
             [mask]="'000000000'"
           />
-          <app-error-mask *ngIf="validatorError('renavam', 'mask')" maskLength=9></app-error-mask>
-          <app-error-msg [control]="(getCampo('renavam'))" label="Renavam"></app-error-msg>
+          <app-error-mask
+            *ngIf="validatorError('renavam', 'mask')"
+            maskLength="9"
+          ></app-error-mask>
+          <app-error-msg
+            [control]="getCampo('renavam')"
+            label="Renavam"
+          ></app-error-msg>
+        </div>
+
+        
+        <div class="input-box">
+          <label for="tipoVeiculo">Tipo do Veículo</label>
+          <div class="custom-select">
+            <select id="tipoVeiculo" formControlName="tipoVeiculo" (change)="onSelect($event.target.value)">
+              <option
+                *ngFor="let tipe of listVehicles"
+                value={{tipe.tipo}}
+              >
+                {{ tipe.name }}
+              </option>
+            </select>
+            <span class="select-arrow"></span>
+            <app-error-msg
+              [control]="getCampo('tipoVeiculo')"
+              label="Tipo do Veículo"
+            ></app-error-msg>
+          </div>
         </div>
 
         <div class="input-box">
           <label for="marca">Marca</label>
           <div class="form-input">
-            <input type="text" id="marca" formControlName="marca" />
+            <input
+              type="text"
+              id="marca"
+              formControlName="marca"
+              (keyup)="consultaFipe(this.form.get('marca')!.value)"
+              [readOnly]="getCampo('tipoVeiculo').value === ''"
+            />
             <!-- <span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span> -->
+
+            <!-- *ngIf="getCampo('marca').value" -->
+            <div class="marcasList" *ngIf="filterFipeArray.length">
+              <ul>
+                <li
+                  *ngFor="let item of filterFipeArray"
+                  (click)="fipeItem(item.nome)"
+                >
+                  {{ item.nome }}
+                </li>
+              </ul>
+            </div>
           </div>
-          <app-error-msg [control]="(getCampo('marca'))" label="Marca"></app-error-msg>
+          <app-error-msg
+            [control]="getCampo('marca')"
+            label="Marca"
+          ></app-error-msg>
         </div>
 
         <div class="input-box">
           <label for="modelo">Modelo</label>
           <input type="text" id="modelo" formControlName="modelo" />
-          <app-error-msg [control]="(getCampo('modelo'))" label="Modelo do Veículo"></app-error-msg>
+          <app-error-msg
+            [control]="getCampo('modelo')"
+            label="Modelo do Veículo"
+          ></app-error-msg>
         </div>
 
         <div class="input-box">
@@ -45,23 +95,10 @@
               </option>
             </select>
             <span class="select-arrow"></span>
-            <app-error-msg [control]="(getCampo('corVeiculo'))" label="Cor do Veículo"></app-error-msg>
-          </div>
-        </div>
-
-        <div class="input-box">
-          <label for="tipoVeiculo">Tipo do Veículo</label>
-          <div class="custom-select">
-            <select id="tipoVeiculo" formControlName="tipoVeiculo">
-              <option
-                *ngFor="let tipe of listVehicles"
-                [value]="tipe.toLowerCase()"
-              >
-                {{ tipe }}
-              </option>
-            </select>
-            <span class="select-arrow"></span>
-            <app-error-msg [control]="(getCampo('tipoVeiculo'))" label="Tipo do Veículo"></app-error-msg>
+            <app-error-msg
+              [control]="getCampo('corVeiculo')"
+              label="Cor do Veículo"
+            ></app-error-msg>
           </div>
         </div>
 
@@ -73,7 +110,10 @@
             formControlName="placa"
             class="input-uppercase"
           />
-          <app-error-msg [control]="(getCampo('placa'))" label="Placa"></app-error-msg>
+          <app-error-msg
+            [control]="getCampo('placa')"
+            label="Placa"
+          ></app-error-msg>
         </div>
       </div>
 
@@ -116,14 +156,30 @@
 
         <div class="input-box">
           <label for="nome">Nome</label>
-          <input type="text" id="nome" formControlName="nome" placeholder="Digite seu primeiro nome"/>
-          <app-error-msg [control]="(getCampo('nome'))" label="Nome"></app-error-msg>
+          <input
+            type="text"
+            id="nome"
+            formControlName="nome"
+            placeholder="Digite seu primeiro nome"
+          />
+          <app-error-msg
+            [control]="getCampo('nome')"
+            label="Nome"
+          ></app-error-msg>
         </div>
 
         <div class="input-box">
           <label for="sobrenome">Sobrenome</label>
-          <input type="text" id="sobrenome" formControlName="sobrenome" placeholder="Digite seu sobrenome"/>
-          <app-error-msg [control]="(getCampo('sobrenome'))" label="Sobrenome"></app-error-msg>
+          <input
+            type="text"
+            id="sobrenome"
+            formControlName="sobrenome"
+            placeholder="Digite seu sobrenome"
+          />
+          <app-error-msg
+            [control]="getCampo('sobrenome')"
+            label="Sobrenome"
+          ></app-error-msg>
         </div>
 
         <div class="input-box">
@@ -135,13 +191,24 @@
             [mask]="'(00) 00000-0000'"
             placeholder="(00) 00000-0000"
           />
-          <app-error-msg [control]="(getCampo('tel'))" label="Telefone"></app-error-msg>
+          <app-error-msg
+            [control]="getCampo('tel')"
+            label="Telefone"
+          ></app-error-msg>
         </div>
 
         <div class="input-box">
           <label for="email">E-mail</label>
-          <input type="text" id="tel" formControlName="email" placeholder="Insira seu email"/>
-          <app-error-msg [control]="(getCampo('email'))" label="E-mail"></app-error-msg>
+          <input
+            type="text"
+            id="tel"
+            formControlName="email"
+            placeholder="Insira seu email"
+          />
+          <app-error-msg
+            [control]="getCampo('email')"
+            label="E-mail"
+          ></app-error-msg>
         </div>
 
         <div class="input-box">
@@ -154,8 +221,14 @@
             [mask]="'00000-000'"
             placeholder="00000-000"
           />
-          <app-error-mask *ngIf="validatorError('cep', 'mask')" maskLength=8></app-error-mask>
-          <app-error-msg [control]="(getCampo('cep'))" label="CEP"></app-error-msg>
+          <app-error-mask
+            *ngIf="validatorError('cep', 'mask')"
+            maskLength="8"
+          ></app-error-mask>
+          <app-error-msg
+            [control]="getCampo('cep')"
+            label="CEP"
+          ></app-error-msg>
         </div>
 
         <div class="input-box">
@@ -181,13 +254,19 @@
         <div class="input-box">
           <label for="numero">Número</label>
           <input type="text" id="complemento" formControlName="numero" />
-          <app-error-msg [control]="(getCampo('numero'))" label="Número"></app-error-msg>
+          <app-error-msg
+            [control]="getCampo('numero')"
+            label="Número"
+          ></app-error-msg>
         </div>
 
         <div class="input-box">
           <label for="complemento">Complemento</label>
           <input type="text" id="complemento" formControlName="complemento" />
-          <app-error-msg [control]="(getCampo('complemento'))" label="Complemento"></app-error-msg>
+          <app-error-msg
+            [control]="getCampo('complemento')"
+            label="Complemento"
+          ></app-error-msg>
         </div>
 
         <div class="input-box">
@@ -199,8 +278,14 @@
             [mask]="'000.000.000-00'"
             placeholder="Digite seu CPF"
           />
-          <app-error-mask *ngIf="validatorError('cpf', 'mask')" maskLength=11></app-error-mask>
-          <app-error-msg [control]="(getCampo('cpf'))" label="CPF"></app-error-msg>
+          <app-error-mask
+            *ngIf="validatorError('cpf', 'mask')"
+            maskLength="11"
+          ></app-error-mask>
+          <app-error-msg
+            [control]="getCampo('cpf')"
+            label="CPF"
+          ></app-error-msg>
         </div>
       </div>
 
@@ -208,7 +293,9 @@
         <button type="submit" [disabled]="!form.valid">Enviar</button>
       </div>
 
-      <app-popup-form-valid *ngIf="formDir.submitted && form.valid"></app-popup-form-valid>
+      <app-popup-form-valid
+        *ngIf="formDir.submitted && form.valid"
+      ></app-popup-form-valid>
     </form>
   </div>
 </div>
