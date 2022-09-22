@@ -98,11 +98,16 @@ export class FormComponent implements OnInit {
         this.fipeListArray = res;
       },
     });
+
+    this.setValueItemFipe();
   }
 
   consultaFipe(text: string) {
     this.filterFipeArray = this.fipeListArray.filter((dados) => {
-      if (text.toLowerCase() === dados.nome.toLowerCase()) {
+      if (
+        text.toLowerCase().replace('ë', 'e') ===
+        dados.nome.toLowerCase().replace('ë', 'e')
+      ) {
         this.form.patchValue({
           marca: dados.nome,
         });
@@ -121,6 +126,12 @@ export class FormComponent implements OnInit {
       marca: name,
     });
     this.filterFipeArray = [];
+  }
+
+  setValueItemFipe() {
+    this.form.patchValue({
+      marca: '',
+    });
   }
 
   getCampo(campo: string) {
